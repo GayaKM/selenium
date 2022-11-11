@@ -65,3 +65,9 @@ class ProductPage:
         colors_id[rand].click()
         list_colors = self.product_colors_title()
         return list_colors[rand]
+
+    def product_quantity(self, num):
+        return self.driver.find_element(By.NAME, "quantity")[num]
+
+    def product_quantity_by_index(self, num):
+        self.product_quantity(num)

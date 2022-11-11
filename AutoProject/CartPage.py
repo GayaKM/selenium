@@ -70,3 +70,10 @@ class CartPage:
         number = self.driver.find_element(By.XPATH, "//div/tool-tip-cart/div/div/label/span").text
         number = self.general.find_the_int_number(number)
         return number
+
+    def edit_product(self, num):
+        """Method that get the index of the spesific """
+        return self.driver.find_elements(By.LINK_TEXT, "EDIT")[num]
+
+    def click_edit(self,num):
+        self.edit_product(num).click()
