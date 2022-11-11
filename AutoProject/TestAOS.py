@@ -140,8 +140,8 @@ class TestAOS(TestCase):
             rand = randint(0, 9)
             self.product.add_quantity(rand)
             self.general.click_cart()
-            self.assertEqual(self.product.product_quantity(0),self.cart.product_quantity(0))
-            self.assertEqual(self.product.product_quantity(1), self.cart.product_quantity(1))
+            self.assertEqual(self.product.product_quantity(0), self.cart.products_quantities()[0])
+            self.assertEqual(self.product.product_quantity(1), self.cart.products_quantities()[1])
 
     def test_7_tablets_path(self):
         """Test the path from product to the home page in tablets category"""
@@ -178,7 +178,7 @@ class TestAOS(TestCase):
         self.payment.click_pay_now_safepay()
         self.assertTrue(self.general.order_message())
         self.general.click_cart()
-        # self.assertEqual(self.cart.empty_cart_massage().text,"Your shopping cart is empty")
+        # self.assertEqual(self.cart.empty_cart_message().text, "Your shopping cart is empty")
         self.assertTrue(self.cart.zero_items_in_cart() == 0)
         self.general.click_my_orders()
         self.assertIsNotNone(self.general.find_order_number())
@@ -187,7 +187,7 @@ class TestAOS(TestCase):
 
     def test_10_login_signout(self):
         """Test that the login and log out process of already existed account are done successfully """
-        self.homepage.click_user_logo()
+        self.general.click_user_logo()
         self.homepage.username()
         self.homepage.fill_username("leonk1")
         self.homepage.password()
@@ -196,5 +196,5 @@ class TestAOS(TestCase):
         self.assertEqual(self.general.find_username().text, "leonk1")
         self.general.click_username()
         self.homepage.click_user_signout()
-        self.homepage.click_user_logo()
+        self.general.click_user_logo()
         self.assertEqual(self.homepage.username().text, "")
