@@ -17,9 +17,11 @@ class CategoryPage:
         self.product = ProductPage(self.driver)
 
     def find_all_products_in_category(self):
+        """Method that finds all the products elements in a specific category page"""
         return self.driver.find_elements(By.CSS_SELECTOR, ".categoryRight>ul>li")
 
     def click_product(self):
+        """Method that gets the products elements and enters a random product page from the category"""
         list_p = self.find_all_products_in_category()
         rand = randint(0, len(list_p)-1)
         list_p[rand].click()
@@ -29,5 +31,5 @@ class CategoryPage:
             list_p[rand].click()
 
     def category_headline(self):
+        """Method that returns the text of the main headline of the category page"""
         return self.driver.find_element(By.CSS_SELECTOR, "[data-ng-class='{ noPromotedProduct : viewAll }']").text
-
