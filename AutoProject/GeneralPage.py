@@ -120,3 +120,9 @@ class GeneralPage:
         """Method that returns the latest (most recant) order that completed from the sign in account"""
         order_numbers = self.driver.find_elements(By.CSS_SELECTOR, '[class="left ng-binding"]')
         return order_numbers[0].text
+
+    def find_username(self):
+        """Method that find the element of the user icon"""
+        wait = WebDriverWait(self.driver, 10)
+        wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "hi-user.containMiniTitle")))
+        return self.driver.find_element(By.CLASS_NAME, "hi-user.containMiniTitle")
