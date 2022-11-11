@@ -43,3 +43,7 @@ class HomePage:
     def click_signin(self):
         """click the signin button in the signin window"""
         self.driver.find_element(By.ID, "sign_in_btnundefined").click()
+
+    def fill_username(self,name):
+        """Method that fills the username in the sign in window"""
+        self.username().send_keys(name)
