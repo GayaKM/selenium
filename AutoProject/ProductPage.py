@@ -69,5 +69,5 @@ class ProductPage:
     def product_quantity(self, num):
         return self.driver.find_element(By.NAME, "quantity")[num]
 
-    def product_quantity_by_index(self, num):
-        self.product_quantity(num)
+    # def product_quantity_by_index(self, num):
+    #     self.product_quantity(num)

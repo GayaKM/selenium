@@ -42,16 +42,55 @@ class OrderPaymentPage:
         """Method that finds the credit card filed in credit card payment method"""
         return self.driver.find_element(By.ID, "creditCard")
 
+    def fill_in_creditcard_number(self, key):
+        """Method that gets a string and fills in the credit card number filed with it"""
+        self.creditcard_number_filed().send_keys(key)
+
     def creditcard_CVVnumber_filed(self):
         """Method that finds the CVV number filed in credit card payment method"""
         return self.driver.find_element(By.NAME, "cvv_number")
+
+    def fill_in_CVV_number(self, key):
+        """Method that gets a string and fills in the CVV credit card filed with it"""
+        self.creditcard_CVVnumber_filed().send_keys(key)
 
     def creditcard_holder_name_filed(self):
         """Method that finds the credit card holder name filed in credit card payment method"""
         return self.driver.find_element(By.NAME, "cardholder_name")
 
+    def fill_in_creditcard_holder(self, key):
+        """Method that gets a string and fills in the credit card holder name filed with it"""
+        self.creditcard_holder_name_filed().send_keys(key)
+
     def click_pay_now_safepay(self):
         """Method that clicks the pay now button in the safe pay method, finsh the order, open completed order page"""
         self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button#pay_now_btn_SAFEPAY")))
-        button= self.driver.find_element(By.CSS_SELECTOR, "button#pay_now_btn_SAFEPAY")
+        button = self.driver.find_element(By.CSS_SELECTOR, "button#pay_now_btn_SAFEPAY")
         self.driver.execute_script("arguments[0].click()", button)
+
+    def click_pay_now_creditcard(self):
+        """Method that clicks the paynow button in the credit card method, finsh the order, open completed order page"""
+        self.wait.until(EC.element_to_be_clickable((By.ID, "pay_now_btn_MasterCredit")))
+        # button = self.driver.find_element(By.ID, "pay_now_btn_MasterCredit")
+        # self.driver.execute_script("arguments[0].click()", button)
+        self.driver.find_element(By.ID, "pay_now_btn_MasterCredit").click()
+
+    def username_filed_order_payment(self):
+        """Method that finds the username element in the order payment page"""
+        return self.driver.find_element(By.NAME, "usernameInOrderPayment")
+
+    def fill_in_username(self, key):
+        """Method that gets a string and fills in the username filed with it"""
+        self.username_filed_order_payment().send_keys(key)
+
+    def password_filed_order_payment(self):
+        """Method that finds the password element in the order payment page"""
+        return self.driver.find_element(By.NAME, "passwordInOrderPayment")
+
+    def fill_in_password(self, key):
+        """Method that gets a string and fills in the password filed with it"""
+        self.password_filed_order_payment().send_keys(key)
+
+    def click_login(self):
+        """Method that clicks the login button in the order payment page"""
+        self.driver.find_element(By.ID,"login_btnundefined").click()

@@ -157,7 +157,7 @@ class TestAOS(TestCase):
         self.assertEqual(self.driver.current_url, "https://www.advantageonlineshopping.com/#/")
 
     def test_8_order_new_user(self):
-        """Test that order completes successfully while the user is created in the presses """
+        """Test that order completes successfully while the user is created in the presses and pay with safe pay"""
         for i in range(randint(2, 4)):
             self.homepage.enter_category()
             self.category.click_product()
@@ -168,7 +168,7 @@ class TestAOS(TestCase):
         self.general.click_cart()
         self.cart.click_checkout()
         self.general.click_register_in_checkout()
-        self.create_account.fill_username("LeonGaya65")
+        self.create_account.fill_username("LeonGaya65!")
         self.create_account.fill_email("LeonGaya65@gmail.com")
         self.create_account.fill_passwords("LeonGaya65!")
         self.create_account.register()
@@ -178,10 +178,41 @@ class TestAOS(TestCase):
         self.payment.click_pay_now_safepay()
         self.assertTrue(self.general.order_message())
         self.general.click_cart()
-        # self.assertEqual(self.cart.empty_cart_message().text, "Your shopping cart is empty")
+        self.assertEqual(self.cart.empty_cart_message().text, "Your shopping cart is empty")
         self.assertTrue(self.cart.zero_items_in_cart() == 0)
         self.general.click_my_orders()
         self.assertIsNotNone(self.general.find_order_number())
+        self.general.click_my_account()
+        self.general.click_delete_account()
+
+    def test_9_order_credit_card(self):
+        """Test that order completes successfully while the user already existed and the pay method is credit card"""
+        for i in range(randint(2, 4)):
+            self.homepage.enter_category()
+            self.category.click_product()
+            rand = randint(0, 9)
+            self.product.add_quantity(rand)
+            self.product.add_to_cart()
+            self.general.click_the_logo()
+        self.general.click_cart()
+        self.cart.click_checkout()
+        self.payment.fill_in_username("leonk1")
+        self.payment.fill_in_password("Ll12345")
+        self.payment.click_login()
+        self.payment.click_next_in_OrderPayment()
+        # self.payment.choose_creditcard()
+        # self.payment.fill_in_creditcard_number("123456789012")
+        # self.payment.fill_in_CVV_number("567")
+        # self.payment.fill_in_creditcard_holder("Leon")
+        self.payment.click_pay_now_creditcard()
+        self.assertTrue(self.general.order_message())
+        order_number = self.general.order_number_order_completed()
+        self.general.click_cart()
+        # print(self.cart.empty_cart_message().text)
+        # self.assertEqual(self.cart.empty_cart_message().text, "Your shopping cart is empty")
+        self.assertTrue(self.cart.zero_items_in_cart() == 0)
+        self.general.click_my_orders()
+        self.assertTrue(self.general.find_order_number() == order_number)
         self.general.click_my_account()
         self.general.click_delete_account()
 

@@ -63,7 +63,8 @@ class CartPage:
 
     def empty_cart_message(self):
         """Method that finds the order complete message in the order completed page"""
-        return self.driver.find_element(By.XPATH, '//div/tool-tip-cart/div/div/label[2]')
+        list_message = self.driver.find_elements(By.CSS_SELECTOR, 'label[translate="Your_shopping_cart_is_empty"][class="center roboto-medium ng-scope"]')
+        return list_message[1]
 
     def zero_items_in_cart(self):
         """Method that finds the  message that shows 0 items in an empty cart page"""

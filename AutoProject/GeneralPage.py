@@ -112,6 +112,9 @@ class GeneralPage:
         """Method that finds the message that says the order completed in the order completed page"""
         return self.driver.find_element(By.CSS_SELECTOR, "[translate='Thank_you_for_buying_with_Advantage']")
 
+    def order_number_order_completed(self):
+        return self.driver.find_element(By.ID, "orderNumberLabel").text
+
     def click_delete_account(self):
         """Method that deletes a sign in account"""
         self.driver.find_element(By.CLASS_NAME, "deleteBtnText").click()
@@ -126,3 +129,7 @@ class GeneralPage:
         wait = WebDriverWait(self.driver, 10)
         wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "hi-user.containMiniTitle")))
         return self.driver.find_element(By.CLASS_NAME, "hi-user.containMiniTitle")
+
+    def click_username(self):
+        """Method that clicks the user icon"""
+        return self.driver.find_element(By.CLASS_NAME, "hi-user.containMiniTitle").click()
