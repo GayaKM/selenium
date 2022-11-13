@@ -181,7 +181,7 @@ class TestAOS(TestCase):
         self.assertEqual(self.cart.empty_cart_message().text, "Your shopping cart is empty")
         self.assertTrue(self.cart.zero_items_in_cart() == 0)
         self.general.click_my_orders()
-        self.assertIsNotNone(self.general.find_order_number())
+        self.assertTrue(self.general.find_order_number().isalnum())
         self.general.click_my_account()
         self.general.click_delete_account()
 

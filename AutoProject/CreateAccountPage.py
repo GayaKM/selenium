@@ -45,5 +45,6 @@ class CreateAccountPage:
 
     def register(self):
         """Method that finish the register process by clicking the i agree checkbox and the register button"""
+        self.wait.until(EC.visibility_of_element_located((By.NAME, "i_agree")))
         self.driver.find_element(By.NAME, "i_agree").click()
         self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '[a-value="REGISTER"]'))).click()
